@@ -2,16 +2,18 @@ package com.fundation.cucumber.cucumber;
 
 public class FizzBuzz {
     public String play(int number){
-        if(number == 0 ){
-            throw new IllegalArgumentException("Number must not be");
-        }
-        if(number%3 == 0 ){
+        String res;
+        if(number == 0 ) throw new IllegalArgumentException("Number must not be 0");
+        if(isMultipleOf(number,3)){
+            if( isMultipleOf(number,5)){
+                return "FizzBuzz";
+            }
             return "Fizz";
-        }
-        if (number%5 == 0 ) {
+        }else if(isMultipleOf(number, 5)){
             return "Buzz";
+        }else{
+            return String.valueOf(number);
         }
-        return String.valueOf(number);
     }
     private boolean isMultipleOf(int number, int i){
         return number%i == 0;
