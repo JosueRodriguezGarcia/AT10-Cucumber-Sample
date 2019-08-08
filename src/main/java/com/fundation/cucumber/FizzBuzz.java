@@ -1,4 +1,4 @@
-package com.fundation.cucumber.cucumber;
+package com.fundation.cucumber;
 
 public class FizzBuzz {
     public String play(int number){

@@ -1,6 +1,5 @@
 package com.fundation.cucumber;
 
-import com.fundation.cucumber.cucumber.FizzBuzz;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -18,6 +17,7 @@ public class FizzBuzzStepdefs {
     @When("I play with number {int}")
     public void iPlayWithNumber(int number) {
         result = fizzBuzz.play(number);
+
     }
 
     @Then("The result is {string}")
