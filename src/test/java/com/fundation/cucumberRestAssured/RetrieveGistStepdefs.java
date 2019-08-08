@@ -1,4 +1,4 @@
-package com.fundation.cucumber;
+package com.fundation.cucumberRestAssured;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
