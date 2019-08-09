@@ -4,6 +4,6 @@ Feature: Retrieve a gist
   And user has content
   When a user makes a post request
   Then the create status code is 201
-  And response includes the following in any order
-  | owner.login           | alszla            |
-  | owner.type            | User              |
+  #And response includes the following in any order
+  #| owner.login           | alszla            |
+  #| owner.type            | User              |
