@@ -158,5 +158,12 @@ public class TestRestAssured {
                 then().
                 body("title", equalTo("Update TestAlbum"));
     }
+
+    @Test
+    public void test_GETAlbumsById1_ShouldBeTitle_quidem_molestiae_enim() {
+        Album album = get("https://jsonplaceholder.typicode.com/albums/1").
+            as(Album.class);
+        Assert.assertEquals("quidem molestiae enim", album.getTitle());
+    }
 }
 
