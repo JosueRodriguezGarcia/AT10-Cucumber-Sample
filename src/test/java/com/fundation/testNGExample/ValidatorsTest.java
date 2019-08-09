@@ -1,13 +1,4 @@
-/**
- * Copyright (c) 2019 Jalasoft.
- *
- * This software is the confidential and proprietary information of Jalasoft.
- * ("Confidential Information"). You shall not
- * disclose such Confidential Information and shall use it only in
- * accordance with the terms of the license agreement you entered into
- * with Jalasoft.
- */
-package com.fundation.logic.common;
+package com.fundation.testNGExample;
 
 //import org.junit.Test;
 
@@ -52,13 +43,12 @@ public class ValidatorsTest {
         SoftAssert softAssert = new SoftAssert();
         System.out.println("*** test case two started ***");
         softAssert.assertEquals("Hello", "Hello", "First soft assert failed");
-        System.out.println("hard assert success....");
+        System.out.println("first soft assert success....");
         softAssert.assertTrue("Hello".equals("hello"), "Second soft assert failed");
         softAssert.assertTrue("Welcome".equals("welcomeeee"), "Third soft assert failed");
         System.out.println("*** test case two executed successfully ***");
         softAssert.assertAll();
     }
-
 
     @AfterMethod
     public void afterMethod(){

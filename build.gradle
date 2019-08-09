@@ -18,11 +18,12 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.0.pr1'
     testCompile 'io.rest-assured:rest-assured:4.0.0'
     testCompile 'io.cucumber:cucumber-junit:4.3.1'
-
     // https://mvnrepository.com/artifact/io.rest-assured/json-path
     compile group: 'io.rest-assured', name: 'json-path', version: '4.0.0'
     // https://mvnrepository.com/artifact/io.rest-assured/xml-path
     compile group: 'io.rest-assured', name: 'xml-path', version: '4.0.0'
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.0.0'
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
 }
