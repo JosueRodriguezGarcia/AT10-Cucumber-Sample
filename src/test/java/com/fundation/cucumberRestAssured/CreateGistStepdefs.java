@@ -56,8 +56,8 @@ public class CreateGistStepdefs {
         json = response.then().statusCode(statusCode);
     }
 
-    @And("response includes the following in any order")
-    public void response_contains_in_any_order(Map<String,String> responseFields){
+    @And("response includes the following")
+    public void response_equals_to(Map<String,String> responseFields){
         for (Map.Entry<String, String> field : responseFields.entrySet()) {
             if(StringUtils.isNumeric(field.getValue())){
                 json.body(field.getKey(), equalTo(Integer.parseInt(field.getValue())));
