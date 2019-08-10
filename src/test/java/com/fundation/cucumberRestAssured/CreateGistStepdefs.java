@@ -16,7 +16,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.specification.ProxySpecification.host;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * @author Alejandro Sánchez Luizaga
@@ -47,7 +47,8 @@ public class CreateGistStepdefs {
     public void a_user_makes_a_post_request () {
         RestAssured.proxy = host("172.31.90.162").withPort(8080);
         response = request.when().post(GIST_ENDPOINT);
-        System.out.println("response: " + response.prettyPrint());
+        System.out.println("Response: ");
+        response.prettyPrint();
     }
 
     @Then("the create status code is (\\d+)")
@@ -55,17 +56,15 @@ public class CreateGistStepdefs {
         json = response.then().statusCode(statusCode);
     }
 
-    /*
     @And("response includes the following in any order")
     public void response_contains_in_any_order(Map<String,String> responseFields){
         for (Map.Entry<String, String> field : responseFields.entrySet()) {
             if(StringUtils.isNumeric(field.getValue())){
-                json.body(field.getKey(), containsInAnyOrder(Integer.parseInt(field.getValue())));
+                json.body(field.getKey(), equalTo(Integer.parseInt(field.getValue())));
             }
             else{
-                json.body(field.getKey(), containsInAnyOrder(field.getValue()));
+                json.body(field.getKey(), equalTo(field.getValue()));
             }
         }
     }
-     */
 }
