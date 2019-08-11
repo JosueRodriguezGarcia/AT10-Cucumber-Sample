@@ -27,7 +27,6 @@ public class CreateGistStepdefs {
     private ValidatableResponse json;
     private RequestSpecification request;
     private AuthenticationSpecification authentication;
-
     private String GIST_ENDPOINT = "https://api.github.com/gists";
 
     @Given("a user is registered at GitHub")
