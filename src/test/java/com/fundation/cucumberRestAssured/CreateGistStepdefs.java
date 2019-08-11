@@ -30,9 +30,6 @@ public class CreateGistStepdefs {
 
     private String GIST_ENDPOINT = "https://api.github.com/gists";
 
-
-    //RestAssured.proxy = host("172.31.90.162").withPort(8080);
-
     @Given("a user is registered at GitHub")
     public void a_user_is_registered_at_GitHub () {
         request = given().auth().preemptive().basic("alszla","misuperpassword123");
