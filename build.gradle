@@ -27,4 +27,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/io.cucumber/cucumber-testng
     compile group: 'io.cucumber', name: 'cucumber-testng', version: '4.7.1'
+
+    compile group: 'org.json', name: 'json', version: '20180813'
 }
