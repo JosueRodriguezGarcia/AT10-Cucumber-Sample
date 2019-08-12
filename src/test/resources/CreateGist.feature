@@ -1,9 +1,10 @@
 Feature: Create a gist
   Scenario: User creates a gist on GitHub
-    Given a user is registered at GitHub
-      And user has content
+    Given alszla has credentials for GitHub
+      And is authenticated at GitHub
+      And has {"files": {"nombre":{"content":"BDD + IntelliJ"}}}
     When a user makes a post request
     Then the create status code is 201
       And response includes the following
-      | owner.login           | alszla            |
-      | owner.type            | User              |
+      | files.nombre.filename | nombre         |
+      | files.nombre.content  | BDD + IntelliJ |

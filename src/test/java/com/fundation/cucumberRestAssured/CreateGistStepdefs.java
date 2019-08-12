@@ -12,7 +12,11 @@ import io.restassured.specification.AuthenticationSpecification;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Logger;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.specification.ProxySpecification.host;
@@ -27,23 +31,46 @@ public class CreateGistStepdefs {
     private ValidatableResponse json;
     private RequestSpecification request;
     private AuthenticationSpecification authentication;
-    private String GIST_ENDPOINT = "https://api.github.com/gists";
+    private String username;
+    private String token;
+    private String gist_endpoint;
+    private String proxyHost;
+    private String proxyPort;
 
-    @Given("a user is registered at GitHub")
-    public void a_user_is_registered_at_GitHub () {
-        request = given().auth().preemptive().basic("alszla","misuperpassword123");
+    private Logger logger = Logger.getLogger("CreateGistStepdefs.class");
+
+    @Given("(.*) has credentials for GitHub")
+    public void user_has_credentials (String user) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("gist.properties")) {
+            Properties properties = new Properties();
+            properties.load(input);
+            username = user;
+            token = properties.getProperty(user);
+            gist_endpoint = properties.getProperty("github_uri") + properties.getProperty("gist_endpoint");
+            proxyHost = properties.getProperty("proxy.host");
+            proxyPort = properties.getProperty("proxy.port");
+        }
+        catch (IOException ioex) {
+            logger.warning("Unable to find gist.properties");
+            ioex.printStackTrace();
+        }
     }
 
-    @And("user has content")
-    public void user_has_content () {
-        request = request.body("{\"files\": {\"previos.txt\": {\"content\": \"BDD + IntelliJ\"}}}");
+    @And("is authenticated at GitHub")
+    public void a_user_is_registered_at_GitHub () {
+        request = given().auth().preemptive().basic(username,token);
+    }
+
+    @And("has (.*)")
+    public void user_has_content (String jsonString) {
+        request = request.body(jsonString);
     }
 
     @When("a user makes a post request")
     public void a_user_makes_a_post_request () {
-        RestAssured.proxy = host("172.31.90.162").withPort(8080);
-        response = request.when().post(GIST_ENDPOINT);
-        System.out.println("Response: ");
+        RestAssured.proxy = host(proxyHost).withPort(Integer.parseInt(proxyPort));
+        response = request.when().post(gist_endpoint);
+        logger.info("Response: ");
         response.prettyPrint();
     }
 
