@@ -1,6 +1,6 @@
 package com.fundation.cucumber;
 
-import com.fundation.cucumber.cucumber.FizzBuzz;
+import com.fundation.cucumber.FizzBuzz;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

@@ -11,6 +11,7 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.AuthenticationSpecification;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +39,9 @@ public class CreateGistStepdefs {
     private String proxyPort;
 
     private Logger logger = Logger.getLogger("CreateGistStepdefs.class");
+    JSONObject jsonObjectL1 = new JSONObject();
+    JSONObject jsonObjectL2 = new JSONObject();
+    JSONObject jsonObjectL3 = new JSONObject();
 
     @Given("(.*) has credentials for GitHub")
     public void user_has_credentials (String user) {
@@ -61,9 +65,12 @@ public class CreateGistStepdefs {
         request = given().auth().preemptive().basic(username,token);
     }
 
-    @And("has (.*)")
-    public void user_has_content (String jsonString) {
-        request = request.body(jsonString);
+    @And("has json data")
+    public void user_has_json_data() {
+        jsonObjectL3.put("content","BDD + IntelliJ");
+        jsonObjectL2.put("nombre",jsonObjectL3);
+        jsonObjectL1.put("files",jsonObjectL2);
+        request = request.body(jsonObjectL1.toString());
     }
 
     @When("a user makes a post request")
