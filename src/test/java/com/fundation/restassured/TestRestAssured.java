@@ -168,7 +168,7 @@ public class TestRestAssured {
     }
 
     @Test
-    public void test_GETPhotosById1_ShouldBeTitle_quidem_molestiae_enim() {
+    public void test_GETPhotosById1_ShouldBeTitle() {
         Photos album = get("https://jsonplaceholder.typicode.com/photos/1").
                 as(Photos.class);
         Assert.assertEquals("accusamus beatae ad facilis cum similique qui sunt", album.getTitle());
@@ -178,8 +178,23 @@ public class TestRestAssured {
     public void test_DeletePhotosByID1_StatusCode_ShoudBe200() {
         Response response =
                 when().
-                        get("https://jsonplaceholder.typicode.com/photos/1");
+                        delete("https://jsonplaceholder.typicode.com/photos/1");
         Assert.assertEquals(200, response.statusCode());
+    }
+
+    @Test
+    public void test_PostPhotosWithTitleTestPhoto_ShoudBeTitle_TestPhotos() {
+        Map<String, Object> mymap = new HashMap<String, Object>();
+        mymap.put("title", "TestPhoto");
+
+        given().
+                contentType(ContentType.JSON).
+                body(mymap).
+                when().
+                post("https://jsonplaceholder.typicode.com/photos").
+                then().
+                statusCode(201);
+        System.out.println(mymap);
     }
 }
 
