@@ -1,4 +1,5 @@
 package com.fundation.restassured;
+
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -16,6 +17,7 @@ import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
+
 /**
  * TestClass class.
  *
@@ -56,7 +58,7 @@ public class TestRestAssured {
     }
 
     @Test
-    public  void requestUsZipCode90210_checkPlaceNameInResponseBody_expectBeberlyHills() {
+    public void requestUsZipCode90210_checkPlaceNameInResponseBody_expectBeberlyHills() {
         given().
                 spec(requestSpec).
                 when().
@@ -108,7 +110,6 @@ public class TestRestAssured {
                 then().
                 assertThat().
                 statusCode(200);
-
     }
 
     @Test
@@ -116,7 +117,7 @@ public class TestRestAssured {
         Response response =
                 when().
                         get("https://jsonplaceholder.typicode.com/Albums/1");
-        Assert.assertEquals(200,response.statusCode());
+        Assert.assertEquals(200, response.statusCode());
     }
 
     @Test
@@ -162,8 +163,23 @@ public class TestRestAssured {
     @Test
     public void test_GETAlbumsById1_ShouldBeTitle_quidem_molestiae_enim() {
         Album album = get("https://jsonplaceholder.typicode.com/albums/1").
-            as(Album.class);
+                as(Album.class);
         Assert.assertEquals("quidem molestiae enim", album.getTitle());
+    }
+
+    @Test
+    public void test_GETPhotosById1_ShouldBeTitle_quidem_molestiae_enim() {
+        Photos album = get("https://jsonplaceholder.typicode.com/photos/1").
+                as(Photos.class);
+        Assert.assertEquals("accusamus beatae ad facilis cum similique qui sunt", album.getTitle());
+    }
+
+    @Test
+    public void test_DeletePhotosByID1_StatusCode_ShoudBe200() {
+        Response response =
+                when().
+                        get("https://jsonplaceholder.typicode.com/photos/1");
+        Assert.assertEquals(200, response.statusCode());
     }
 }
 
